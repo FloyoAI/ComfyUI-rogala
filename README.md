@@ -59,9 +59,21 @@ ComfyUI-rogala/
     ├── Z-Image-Turbo_AlignedTextOverlayImages.json
     └── Z-Image-Turbo_SamplerSchedulerIterator.json
 ```
+
+# SmartAttentionDispatcher
+
+SmartAttentionDispatcher is a ComfyUI node that patches model attention with SageAttention kernels (SA2 / SA3) to speed up image and video generation.
+Automatically detects GPU architecture, installed libraries, and available kernels. Supports SA2 (fp16, fp8, fp8++, triton) and SA3 (Blackwell only), with a dynamic mode that switches kernels per diffusion step. Works with Flux, SD3.5, SDXL, ErnieImage, Qwen, Z-Image, Wan, LTX and other DiT-based models.
+SA2 — Turing (RTX 20xx) and newer. Best results on Ada (RTX 40xx) and older hardware where PyTorch SDPA is not yet fully optimized for the architecture.
+SA3 — Blackwell (RTX 50xx) only. Requires CUDA 12.8+, sageattn3 package, SM 100+.
+Tested on RTX 5060 Ti (Blackwell, 16GB) — results vary significantly by model size and type. Image models: +8–12%. Video models with large sequences: up to +25–50% (ltx-2.3-22b-distilled, Wan2.2).
+Node status panel shows active mode, GPU tier, kernel availability, and model architecture after each run.
+Recommended launch flags: --fast
+Do not use --use-sage-attention together with this node.
+
 ---
 
-# Advanced Style Selector 🎨
+# Advanced Style Selector
 
 A custom ComfyUI node for visual style selection with a built-in thumbnail gallery. Applies one or more styles to positive/negative prompts and encodes them directly to **CONDITIONING** — no extra CLIPTextEncode node needed.
 
