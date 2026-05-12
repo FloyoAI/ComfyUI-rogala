@@ -11,8 +11,9 @@ from .nodes.aligned_text_overlay_video  import NODE_CLASS_MAPPINGS as _VIDEO_NOD
 from .nodes.ltx_resolution_selector     import NODE_CLASS_MAPPINGS as _LTX_NODES
 from .nodes.fmlf_ltx                    import NODE_CLASS_MAPPINGS as _FMLF_NODES
 from .nodes.sampler_ltxv                import NODE_CLASS_MAPPINGS as _SAMPLER_LTX_NODES
-from .nodes.advanced_style_selector     import NODE_CLASS_MAPPINGS as _STYLE_NODES
-from .nodes.advanced_style_selector     import reload_styles
+from .nodes.advanced_style_selector          import NODE_CLASS_MAPPINGS as _STYLE_NODES
+from .nodes.advanced_style_selector          import reload_styles
+from .nodes.smart_attention_dispatcher       import NODE_CLASS_MAPPINGS as _SAD_NODES
 
 import os as _os
 import json as _json
@@ -53,6 +54,7 @@ NODE_CLASS_MAPPINGS: dict = {
     **_FMLF_NODES,
     **_SAMPLER_LTX_NODES,
     **_STYLE_NODES,
+    **_SAD_NODES,
 }
 
 NODE_DISPLAY_NAMES: dict = {
@@ -62,7 +64,8 @@ NODE_DISPLAY_NAMES: dict = {
     "LtxResolutionSelector":     "LTX Resolution Selector",
     "FmlfLtx23":                 "FMLFLTX_2.3",
     "SamplerLtxv23":             "SamplerLTXV_2.3",
-    "AdvancedStyleSelector":     "Advanced Style Selector 🎨",
+    "AdvancedStyleSelector":     "Advanced Style Selector",
+    "SmartAttentionDispatcher":  "Smart Attention Dispatcher",
 }
 
 WEB_DIRECTORY = "./js"
