@@ -293,9 +293,10 @@ class FmlfLtx23:
 
         # ── Empty audio latent ─────────────────────────────────────────────
         frame_rate    = int(round(fps))
-        z_ch          = audio_vae.latent_channels
-        a_freq        = audio_vae.latent_frequency_bins
-        n_audio_lat   = audio_vae.num_of_latents_from_frames(length, frame_rate)
+        z_ch        = audio_vae.latent_channels
+        a_freq      = audio_vae.extra_1d_channel
+        latent_dim  = audio_vae.latent_dim
+        n_audio_lat = int(length * frame_rate / audio_vae.autoencoder.mel_hop_length / latent_dim) + 1
 
         audio_samples = torch.zeros(
             (batch_size, z_ch, n_audio_lat, a_freq),
